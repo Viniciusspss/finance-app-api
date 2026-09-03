@@ -45,3 +45,16 @@ usersRouter.get('/me', auth, async (req, res) => {
 
     res.status(statusCode).send(body)
 })
+
+usersRouter.delete('/me', auth, async (req, res) => {
+    const deleteUserController = makeDeleteUserController()
+
+    const { statusCode, body } = await deleteUserController.execute({
+        ...req,
+        params: {
+            userId: req.userId,
+        },
+    })
+
+    res.status(statusCode).send(body)
+})
