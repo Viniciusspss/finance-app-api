@@ -1,5 +1,5 @@
-import { UserModel } from '../../models/User.js'
-import { toDocument } from '../../utils/decimal.js'
+import { UserModel } from '../../../models/User.js'
+import { toDocument } from '../../../utils/decimal.js'
 
 export class MongooseGetUserByEmailRepository {
     async execute(email) {
