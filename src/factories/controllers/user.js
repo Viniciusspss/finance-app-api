@@ -27,6 +27,21 @@ export const makeGetUserByIdController = () => {
     return getUserByIdController
 }
 
+export const makeDeleteUserController = () => {
+    const deleteUserRepository = new MongooseDeleteUserRepository()
+
+    const deleteUserUseCase = new DeleteUserUseCase(deleteUserRepository)
+
+    const deleteUserController = new DeleteUserController(deleteUserUseCase)
+
+    return deleteUserController
+}
+
+export const makeDeleteUserUseCase = () => {
+    const deleteUserRepository = new MongooseDeleteUserRepository()
+    return new DeleteUserUseCase(deleteUserRepository)
+}
+
 export const makeGetUserByIdUseCase = () => {
     const getUserByIdRepository = new MongooseGetUserByIdRepository()
     return new GetUserByIdUseCase(getUserByIdRepository)
