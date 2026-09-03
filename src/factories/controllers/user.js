@@ -37,6 +37,35 @@ export const makeDeleteUserController = () => {
     return deleteUserController
 }
 
+export const makeUpdateUserController = () => {
+    const getUserByEmailRepository = new MongooseGetUserByEmailRepository()
+
+    const updateUserRepository = new MongooseUpdateUserRepository()
+
+    const passwordHasherAdapter = new PasswordHasherAdapter()
+
+    const updateUserUseCase = new UpdateUserUseCase(
+        getUserByEmailRepository,
+        updateUserRepository,
+        passwordHasherAdapter,
+    )
+    const updateUserController = new UpdateUserController(updateUserUseCase)
+
+    return updateUserController
+}
+
+export const makeUpdateUserUseCase = () => {
+    const getUserByEmailRepository = new MongooseGetUserByEmailRepository()
+    const updateUserRepository = new MongooseUpdateUserRepository()
+    const passwordHasherAdapter = new PasswordHasherAdapter()
+
+    return new UpdateUserUseCase(
+        getUserByEmailRepository,
+        updateUserRepository,
+        passwordHasherAdapter,
+    )
+}
+
 export const makeDeleteUserUseCase = () => {
     const deleteUserRepository = new MongooseDeleteUserRepository()
     return new DeleteUserUseCase(deleteUserRepository)
