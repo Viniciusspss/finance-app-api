@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+
+# MongoDB volume
+.mongodb-data
+
+# Environment variables
+.env
+.env.test
+
+# Tests Coverage
+coverage
+
+
+

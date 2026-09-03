@@ -1,21 +1,30 @@
 {
-  "name": "finance-app-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Viniciusspss/finance-app-api.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Viniciusspss/finance-app-api/issues"
-  },
-  "homepage": "https://github.com/Viniciusspss/finance-app-api#readme"
+    "name": "finance-app-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "dotenv -e .env.test -- node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests --silent --runInBand --detectOpenHandles --forceExit",
+        "test:watch": "npm run test -- --watch --runInBand",
+        "test:coverage": "npm run test -- --coverage",
+        "postinstall": "husky",
+        "start:dev": "node --watch index.js",
+        "start": "node index.js",
+        "prettier:check": "prettier --check src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Viniciusspss/finance-app-api.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Viniciusspss/finance-app-api/issues"
+    },
+    "homepage": "https://github.com/Viniciusspss/finance-app-api#readme",
+    "devDependencies": {
+        "prettier": "^3.9.6"
+    }
 }
