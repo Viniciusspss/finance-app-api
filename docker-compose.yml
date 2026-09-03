@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: finance-app-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: finance_app
+
+  mongodb-test:
+    image: mongo:7
+    container_name: finance-app-mongodb-test
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./.mongodb-test-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: finance_app_test

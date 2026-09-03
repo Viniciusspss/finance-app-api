@@ -3,6 +3,7 @@ node_modules
 
 # MongoDB volume
 .mongodb-data
+.mongodb-test-data
 
 # Environment variables
 .env
