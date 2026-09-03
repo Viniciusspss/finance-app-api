@@ -58,3 +58,16 @@ usersRouter.delete('/me', auth, async (req, res) => {
 
     res.status(statusCode).send(body)
 })
+
+usersRouter.patch('/me', auth, async (req, res) => {
+    const updateUserController = makeUpdateUserController()
+
+    const { statusCode, body } = await updateUserController.execute({
+        ...req,
+        params: {
+            userId: req.userId,
+        },
+    })
+
+    res.status(statusCode).send(body)
+})
