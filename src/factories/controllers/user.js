@@ -2,13 +2,19 @@ import {
     MongooseCreateUserRepository,
     MongooseGetUserByEmailRepository,
 } from '../../repositories/mongoose/index.js'
-import { CreateUserUseCase } from '../../use-cases/index.js'
+import {
+    CreateUserUseCase,
+    LoginUserUseCase,
+    RefreshTokenUseCase,
+} from '../../use-cases/index.js'
 import { CreateUserController } from '../../controller/index.js'
 
 import {
     PasswordHasherAdapter,
     IdGeneratorAdapter,
     TokensGeneratorAdapter,
+    PasswordComparatorAdapter,
+    TokenVerifierAdapter,
 } from '../../adapters/index.js'
 
 export const makeCreateUserController = () => {
@@ -33,4 +39,53 @@ export const makeCreateUserController = () => {
     const createUserController = new CreateUserController(createUserUseCase)
 
     return createUserController
+}
+
+export const makeLoginUserUseCase = () => {
+    const getUserByEmailRepository = new MongooseGetUserByEmailRepository()
+    const passwordComparatorAdapter = new PasswordComparatorAdapter()
+    const tokensGeneratorAdapter = new TokensGeneratorAdapter()
+
+    return new LoginUserUseCase(
+        getUserByEmailRepository,
+        passwordComparatorAdapter,
+        tokensGeneratorAdapter,
+    )
+}
+
+export const makeRefreshTokenUseCase = () => {
+    const tokensGeneratorAdapter = new TokensGeneratorAdapter()
+    const tokenVerifierAdapter = new TokenVerifierAdapter()
+
+    return new RefreshTokenUseCase(tokensGeneratorAdapter, tokenVerifierAdapter)
+}
+
+export const makeLoginUserController = () => {
+    const getUserByEmailRepository = new MongooseGetUserByEmailRepository()
+    const passwordComparatorAdapter = new PasswordComparatorAdapter()
+    const tokensGeneratorAdapter = new TokensGeneratorAdapter()
+    const loginUserUseCase = new LoginUserUseCase(
+        getUserByEmailRepository,
+        passwordComparatorAdapter,
+        tokensGeneratorAdapter,
+    )
+
+    const loginUserController = new LoginUserController(loginUserUseCase)
+
+    return loginUserController
+}
+
+export const makeRefreshTokenController = () => {
+    const tokensGeneratorAdapter = new TokensGeneratorAdapter()
+    const tokenVerifierAdapter = new TokenVerifierAdapter()
+    const refreshTokenUseCase = new RefreshTokenUseCase(
+        tokensGeneratorAdapter,
+        tokenVerifierAdapter,
+    )
+
+    const refreshTokenController = new RefreshTokenController(
+        refreshTokenUseCase,
+    )
+
+    return refreshTokenController
 }
