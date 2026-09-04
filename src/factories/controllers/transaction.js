@@ -21,6 +21,35 @@ import {
 
 import { IdGeneratorAdapter } from '../../adapters/index.js'
 
+export const makeCreateTransactionUseCase = () => {
+    return new CreateTransactionUseCase(
+        new MongooseCreateTransactionRepository(),
+        new MongooseGetUserByIdRepository(),
+        new IdGeneratorAdapter(),
+    )
+}
+
+export const makeDeleteTransactionUseCase = () => {
+    return new DeleteTransactionUseCase(
+        new MongooseDeleteTransactionRepository(),
+        new MongooseGetTransactionByIdRepository(),
+    )
+}
+
+export const makeGetTransactionsByUserIdUseCase = () => {
+    return new GetTransactionsByUserIdUseCase(
+        new MongooseGetTransactionsByUserIdRepository(),
+        new MongooseGetUserByIdRepository(),
+    )
+}
+
+export const makeUpdateTransactionUseCase = () => {
+    return new UpdateTransactionUseCase(
+        new MongooseUpdateTransactionRepository(),
+        new MongooseGetTransactionByIdRepository(),
+    )
+}
+
 export const makeCreateTransactionController = () => {
     const createTransactionRepository =
         new MongooseCreateTransactionRepository()

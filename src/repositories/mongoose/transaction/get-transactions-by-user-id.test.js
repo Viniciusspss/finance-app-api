@@ -11,6 +11,7 @@ describe('Get Transactions By User Id Repository', () => {
         await UserModel.create(user)
         await TransactionModel.create({
             ...transaction,
+            user_id: user.id,
             date: new Date(from),
         })
         const sut = new MongooseGetTransactionsByUserIdRepository()

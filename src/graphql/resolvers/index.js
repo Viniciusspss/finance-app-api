@@ -9,18 +9,20 @@ import {
 } from '../../errors/index.js'
 import { TransactionNotFoundError } from '../../errors/transaction.js'
 import {
-    makeCreateTransactionUseCase,
     makeCreateUserUseCase,
-    makeDeleteTransactionUseCase,
     makeDeleteUserUseCase,
-    makeGetTransactionsByUserIdUseCase,
     makeGetUserBalanceUseCase,
     makeGetUserByIdUseCase,
     makeLoginUserUseCase,
     makeRefreshTokenUseCase,
-    makeUpdateTransactionUseCase,
     makeUpdateUserUseCase,
 } from '../../factories/controllers/user.js'
+import {
+    makeCreateTransactionUseCase,
+    makeDeleteTransactionUseCase,
+    makeGetTransactionsByUserIdUseCase,
+    makeUpdateTransactionUseCase,
+} from '../../factories/controllers/transaction.js'
 import { MongooseGetTransactionByIdRepository } from '../../repositories/mongoose/index.js'
 import {
     createUserSchema,
@@ -44,6 +46,10 @@ const requireAuth = (context) => {
 }
 
 const handleDomainError = (error) => {
+    if (error instanceof GraphQLError) {
+        throw error
+    }
+
     if (error instanceof UserNotFoundError) {
         throw new GraphQLError('User not found', {
             extensions: { code: 'NOT_FOUND' },

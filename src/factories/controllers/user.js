@@ -33,6 +33,16 @@ import {
     TokenVerifierAdapter,
 } from '../../adapters/index.js'
 
+export const makeCreateUserUseCase = () => {
+    return new CreateUserUseCase(
+        new MongooseGetUserByEmailRepository(),
+        new MongooseCreateUserRepository(),
+        new PasswordHasherAdapter(),
+        new IdGeneratorAdapter(),
+        new TokensGeneratorAdapter(),
+    )
+}
+
 export const makeGetUserByIdController = () => {
     const getUserByIdRepository = new MongooseGetUserByIdRepository()
 

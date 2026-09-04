@@ -2,6 +2,7 @@ import { transaction, user } from '../../../tests/index.js'
 import { MongooseCreateTransactionRepository } from './create-transaction.js'
 import { UserModel } from '../../../models/User.js'
 import { TransactionModel } from '../../../models/Transaction.js'
+import { formatAmount } from '../../../utils/decimal.js'
 
 describe('Create Transaction Repository', () => {
     it('should create a transaction on db', async () => {
@@ -25,7 +26,7 @@ describe('Create Transaction Repository', () => {
             user_id: transaction.user_id,
             name: transaction.name,
             date: new Date(transaction.date),
-            amount: String(transaction.amount),
+            amount: formatAmount(transaction.amount),
             type: transaction.type,
         })
     })

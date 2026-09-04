@@ -11,7 +11,7 @@ export class MongooseDeleteUserRepository {
             throw new UserNotFoundError(userId)
         }
 
-        await TransactionModel.deleteMany({ user: user._id })
+        await TransactionModel.deleteMany({ user_id: userId })
         await UserModel.deleteOne({ _id: user._id })
 
         return toDocument(user)

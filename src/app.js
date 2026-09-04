@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import fs from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { createApolloServer } from './graphql/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -13,6 +14,8 @@ const app = express()
 
 app.use(cors({ origin: 'http://localhost:5173' }))
 app.use(express.json())
+
+await createApolloServer(app)
 
 app.use('/api/users', usersRouter)
 app.use('/api/transactions', transactionsRouter)

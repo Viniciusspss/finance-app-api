@@ -19,7 +19,7 @@ describe('Delete User Repository', () => {
         const createdUser = await UserModel.create(user)
         await TransactionModel.create({
             id: faker.string.uuid(),
-            user: createdUser._id,
+            user_id: createdUser.id,
             name: 'Test',
             date: new Date(),
             amount: '100',
@@ -30,7 +30,7 @@ describe('Delete User Repository', () => {
         await sut.execute(user.id)
 
         const transactions = await TransactionModel.find({
-            user: createdUser._id,
+            user_id: createdUser.id,
         })
         expect(transactions).toHaveLength(0)
     })
