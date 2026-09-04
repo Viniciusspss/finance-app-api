@@ -1,11 +1,13 @@
 import {
     MongooseCreateUserRepository,
     MongooseGetUserByEmailRepository,
+    MongooseGetUserByIdRepository,
 } from '../../repositories/mongoose/index.js'
 import {
     CreateUserUseCase,
     LoginUserUseCase,
     RefreshTokenUseCase,
+    GetUserByIdUseCase,
 } from '../../use-cases/index.js'
 import { CreateUserController } from '../../controller/index.js'
 
@@ -15,6 +17,7 @@ import {
     TokensGeneratorAdapter,
     PasswordComparatorAdapter,
     TokenVerifierAdapter,
+    PasswordHasherAdapter,
 } from '../../adapters/index.js'
 
 export const makeGetUserByIdController = () => {
@@ -147,4 +150,30 @@ export const makeRefreshTokenController = () => {
     )
 
     return refreshTokenController
+}
+
+export const makeGetUserBalanceController = () => {
+    const getUserBalanceRepository = new MongooseGetUserBalanceRepository()
+    const getUserByIdRepository = new MongooseGetUserByIdRepository()
+
+    const getUserBalanceUseCase = new GetUserBalanceUseCase(
+        getUserBalanceRepository,
+        getUserByIdRepository,
+    )
+
+    const getUserBalanceController = new GetUserBalanceController(
+        getUserBalanceUseCase,
+    )
+
+    return getUserBalanceController
+}
+
+export const makeGetUserBalanceUseCase = () => {
+    const getUserBalanceRepository = new MongooseGetUserBalanceRepository()
+    const getUserByIdRepository = new MongooseGetUserByIdRepository()
+
+    return new GetUserBalanceUseCase(
+        getUserBalanceRepository,
+        getUserByIdRepository,
+    )
 }
