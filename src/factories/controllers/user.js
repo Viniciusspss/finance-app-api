@@ -17,7 +17,6 @@ import {
     TokensGeneratorAdapter,
     PasswordComparatorAdapter,
     TokenVerifierAdapter,
-    PasswordHasherAdapter,
 } from '../../adapters/index.js'
 
 export const makeGetUserByIdController = () => {
