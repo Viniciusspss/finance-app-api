@@ -1,5 +1,5 @@
-import { TransactionModel } from '../../models/Transaction.js'
-import { toDocument } from '../../utils/decimal.js'
+import { TransactionModel } from '../../../models/Transaction.js'
+import { toDocument } from '../../../utils/decimal.js'
 
 export class MongooseGetTransactionsByUserIdRepository {
     async execute(userId, from, to) {

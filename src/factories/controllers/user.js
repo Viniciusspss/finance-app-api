@@ -1,15 +1,29 @@
 import {
     MongooseCreateUserRepository,
+    MongooseDeleteUserRepository,
+    MongooseGetUserBalanceRepository,
     MongooseGetUserByEmailRepository,
     MongooseGetUserByIdRepository,
+    MongooseUpdateUserRepository,
 } from '../../repositories/mongoose/index.js'
 import {
     CreateUserUseCase,
+    DeleteUserUseCase,
+    GetUserBalanceUseCase,
+    GetUserByIdUseCase,
     LoginUserUseCase,
     RefreshTokenUseCase,
-    GetUserByIdUseCase,
+    UpdateUserUseCase,
 } from '../../use-cases/index.js'
-import { CreateUserController } from '../../controller/index.js'
+import {
+    CreateUserController,
+    DeleteUserController,
+    GetUserBalanceController,
+    GetUserByIdController,
+    LoginUserController,
+    RefreshTokenController,
+    UpdateUserController,
+} from '../../controller/index.js'
 
 import {
     PasswordHasherAdapter,

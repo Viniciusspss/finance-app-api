@@ -1,10 +1,10 @@
-import { TransactionModel } from '../../models/Transaction.js'
+import { TransactionModel } from '../../../models/Transaction.js'
 import {
     formatAmount,
     percentageOfTotal,
     subtractAmounts,
     sumAmounts,
-} from '../../utils/decimal.js'
+} from '../../../utils/decimal.js'
 
 export class MongooseGetUserBalanceRepository {
     async execute(userId, from, to) {

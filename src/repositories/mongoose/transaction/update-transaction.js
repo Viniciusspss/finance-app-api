@@ -1,4 +1,4 @@
-import { TransactionModel } from '../../models/Transaction.js'
+import { TransactionModel } from '../../../models/Transaction.js'
 import { TransactionNotFoundError } from '../../../errors/index.js'
 import { formatAmount, toDocument } from '../../../utils/decimal.js'
 
