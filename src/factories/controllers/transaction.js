@@ -1,4 +1,7 @@
-import { CreateTransactionController } from '../../controller/index.js'
+import {
+    CreateTransactionController,
+    DeleteTransactionController,
+} from '../../controller/index.js'
 import {
     MongooseCreateTransactionRepository,
     MongooseGetUserByIdRepository,
