@@ -2,8 +2,13 @@ import { CreateTransactionController } from '../../controller/index.js'
 import {
     MongooseCreateTransactionRepository,
     MongooseGetUserByIdRepository,
+    MongooseDeleteTransactionRepository,
+    MongooseGetTransactionByIdRepository,
 } from '../../repositories/mongoose/index.js'
-import { CreateTransactionUseCase } from '../../use-cases/index.js'
+import {
+    CreateTransactionUseCase,
+    DeleteTransactionUseCase,
+} from '../../use-cases/index.js'
 
 import { IdGeneratorAdapter } from '../../adapters/index.js'
 
@@ -26,4 +31,23 @@ export const makeCreateTransactionController = () => {
     )
 
     return createTransactionController
+}
+
+export const makeDeleteTransactionController = () => {
+    const deleteTransactionRepository =
+        new MongooseDeleteTransactionRepository()
+
+    const getTransactionByIdRepository =
+        new MongooseGetTransactionByIdRepository()
+
+    const deleteTransactionUseCase = new DeleteTransactionUseCase(
+        deleteTransactionRepository,
+        getTransactionByIdRepository,
+    )
+
+    const deleteTransactionController = new DeleteTransactionController(
+        deleteTransactionUseCase,
+    )
+
+    return deleteTransactionController
 }
