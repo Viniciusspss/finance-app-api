@@ -14,3 +14,12 @@ export const forbiddenResponse = () =>
     forbidden({
         message: 'Forbidden',
     })
+
+export const sanitizeUser = (user) => {
+    if (!user) {
+        return user
+    }
+    const sanitizedUser = { ...user }
+    delete sanitizedUser.password
+    return sanitizedUser
+}
