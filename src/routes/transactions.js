@@ -4,10 +4,29 @@ import {
     makeCreateTransactionController,
     makeDeleteTransactionController,
     makeUpdateTransactionController,
+    makeGetTransactionsByUserIdController,
 } from '../factories/controllers/transaction.js'
 import { auth } from '../middlewares/auth.js'
 
 export const transactionsRouter = Router()
+
+transactionsRouter.get('/me', auth, async (req, res) => {
+    const getTransactionsByUserIdController =
+        makeGetTransactionsByUserIdController()
+
+    const { statusCode, body } =
+        await getTransactionsByUserIdController.execute({
+            ...req,
+            query: {
+                ...req.query,
+                from: req.query.from,
+                to: req.query.to,
+                userId: req.userId,
+            },
+        })
+
+    res.status(statusCode).send(body)
+})
 
 transactionsRouter.post('/me', auth, async (req, res) => {
     const createTransactionController = makeCreateTransactionController()
