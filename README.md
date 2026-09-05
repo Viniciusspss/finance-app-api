@@ -68,7 +68,6 @@ A API REST fornece endpoints para gerenciar usuários e transações:
 
 - `POST /api/transactions/me` – Criar nova transação
 - `GET /api/transactions/me` – Listar transações do usuário
-- `GET /api/transactions/:id` – Obter detalhes de uma transação
 - `PATCH /api/transactions/:id` – Atualizar transação
 - `DELETE /api/transactions/:id` – Deletar transação
 
